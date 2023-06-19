@@ -137,6 +137,65 @@
         </section>
 
         <section>
+            <h6>Networked Audio</h6>
+
+            <section>
+                <blockquote>In a distributed audio system, cooperating entities must be served with the audio and
+                    control data that they need in order to perform their part of a signal processing problem.
+                </blockquote>
+            </section>
+
+            <section>
+                <p>Transport layer protocols</p>
+                <ul>
+                    <li class="fragment">TCP
+                        <ul>
+                            <li class="fragment">One-to-one (<em>unicast</em>)</li>
+                            <li class="fragment">Connection-based</li>
+                            <li class="fragment">Redundancy; guarantees on packet ordering and delivery</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">UDP
+                        <ul>
+                            <li class="fragment">One-to-one</li>
+                            <li class="fragment">One-to-many (<em>multicast</em>)</li>
+                            <li class="fragment">One-to-all (<em>broadcast</em>)</li>
+                            <li class="fragment"><em>Connectionless</em></li>
+                            <li class="fragment">No transmission guarantees; no associated overhead</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <p>Network layer protocols</p>
+                <ul>
+                    <li class="fragment">AVB/AES67
+                        <ul>
+                            <li class="fragment">Reliant on PTP-enabled hardware</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Dante
+                        <ul>
+                            <li class="fragment">Proprietary</li>
+                            <li class="fragment">Also reliant on PTP</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <p>Other systems</p>
+                <ul>
+                    <li>JackTrip</li>
+                    <li>NetJack</li>
+                    <li>ZitaNJBridge</li>
+                    <li>A variety of other UDP-based systems for remote rehearsals, networked concerts, etc.</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
             <h6>Prior Art</h6>
 
             <section>
@@ -160,7 +219,7 @@
             </section>
 
             <section>
-                <img src="./assets/rushton2023.png" width="600">
+                <img src="./assets/rushton2023.png" width="700">
 
                 <p>Rushton, Michon &amp; Letz (2023) <em>A Microcontroller-based Network Client Towards Distributed
                     Spatial Audio</em></p>
@@ -184,6 +243,42 @@
                     inter-client synchronicity? What are the effects of loss of
                     synchronicity on distributed spatialisation algorithms?
                 </blockquote>
+            </section>
+        </section>
+
+        <section>
+            <h6>The Microcontroller Platform</h6>
+
+            <img src="./assets/module.jpeg" width="500">
+
+            <ul>
+                <li class="fragment">Support for ethernet and audio</li>
+                <li class="fragment">Easily reprogrammable</li>
+                <li class="fragment">~€45</li>
+            </ul>
+        </section>
+
+        <section>
+            <h6>The Networked Audio Server</h6>
+
+            <section>
+                <img src="./assets/waveform.png" width="600">
+
+                <pre style="width: 920px;"><code data-trim class="txt" data-line-numbers="|3-5|6,7|8,9">
+                           00 01 02 03 04 05 06 07  08 09 0a 0b 0c 0d 0e 0f
+
+                    0000   01 00 5e 04 e0 04 a0 36  bc d0 aa 18 08 00 45 00   ..^....6......E.
+                    0010   00 62 8b b5 40 00 01 11  63 1a c0 a8 0a 0a e0 04   .b..@...c.......
+                    0020   e0 04 39 f9 a3 56 00 4e  66 2b df 1c 04 02 02 02   ..9..V.Nf+......
+                    0030   3f 7a 40 7a 41 7a 42 7a  43 7a 44 7a 45 7a 46 7a   ?z@zAzBzCzDzEzFz
+                    0040   47 7a 48 7a 49 7a 4a 7a  4b 7a 4c 7a 4d 7a 4e 7a   GzHzIzJzKzLzMzNz
+                    0050   2c 8c ff 88 43 86 05 84  46 82 00 81 44 80 00 80   ,...C...F...D...
+                    0060   45 80 ff 80 46 82 06 84  41 86 02 89 29 8c db 8f   E...F...A...)...
+                </code></pre>
+            </section>
+
+            <section>
+                <img src="./assets/audio-server.png" width="1100">
             </section>
         </section>
     </div>
