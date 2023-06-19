@@ -1,40 +1,212 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>Networked Microcontrollers for Distributed Audio Spatialisation</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,300;1,300&family=DM+Serif+Display:ital@0;1&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/aau.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <aside class="aau-logo"><img src="./assets/__AAU_LEFT_RGB.png"></aside>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <div class="slides">
+        <section>
+            <h2>Networked Microcontrollers for Distributed Audio Spatialisation</h2>
+            <p>Thomas Albert Rushton</p>
+        </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        <section>
+            <h6>Wave Field Synthesis</h6>
+            <section>
+                <img src="./assets/wfs_1.png" width="600">
+
+                <p class="fragment">Synthesise a wavefront via secondary point sources</p>
+            </section>
+
+            <section>
+                <img src="./assets/wfs_2.png" width="600">
+
+                <p>Driving function for each speaker is the <em>virtual propagation delay</em></p>
+
+                <p class="fragment">And a filter to model losses</p>
+            </section>
+
+            <section>
+                <img src="./assets/wfs_3.png" width="500">
+
+                <p class="fragment">
+                    \[\begin{equation*}
+                    \mathbf{x} = \begin{bmatrix}x & y & z\end{bmatrix}^T
+                    \end{equation*} \]
+                </p>
+
+                <p class="fragment">
+                    \[\begin{equation*}
+                    \hat{d}(\mathbf{x},t) = \hat{s}_{\text{in}, k}(t) \ast d_k(\mathbf{x},t)
+                    \end{equation*} \]
+                </p>
+
+                <p class="fragment">
+                    \[\begin{equation*}
+                    d_k(\mathbf{x},t) = f(\mathbf{x}, t) \ast \delta\left(t - \frac{r_k}{c}\right)
+                    \end{equation*} \]
+                </p>
+            </section>
+
+        </section>
+
+        <section>
+            <h6>Motivation</h6>
+
+            <section>
+                <img src="./assets/wfs_4.png" width="600">
+
+                <p>WFS systems are typically centralised</p>
+
+                <p class="fragment">Lots of output channels &mdash; costly</p>
+            </section>
+
+            <section>
+                <img src="./assets/wfs_5.png" width="600">
+
+                <p>What if we could distribute the work?</p>
+            </section>
+        </section>
+
+        <section>
+            <h6>Distributed Systems</h6>
+
+            <section>
+                <blockquote>"A distributed system is a collection of independent entities that cooperate to solve a
+                    problem that cannot be individually solved."
+                </blockquote>
+                <small>Kshemkalyani &amp; Singhal (2011)<em> Distributed Computing: Principles, Algorithms, and
+                    Systems</em></small>
+            </section>
+
+            <section>
+                <p>Desirable qualities:</p>
+
+                <ul>
+                    <li>Scalability
+                        <ul class="fragment">
+                            <li>Adding more entities <em>should not pose a bottleneck</em> for the communication network
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Modularity
+                        <ul>
+                            <li class="fragment">Entities may be added to the system <em>without affecting
+                                performance</em></li>
+                            <li class="fragment">The system is <em>incrementally extensible</em></li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Improved cost/performance ratio
+                        <ul>
+                            <li class="fragment">A scalable, modular system can be extended with <em>minimal
+                                redundancy</em></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <p>Undesirable qualities:</p>
+
+                <ul>
+                    <li class="fragment">Complexity
+                        <ul>
+                            <li class="fragment">Harder to update and troubleshoot</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">More potential points of failure</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <h6>Prior Art</h6>
+
+            <section>
+                <img src="./assets/gabrielli2012.png" width="600">
+
+                <p>Gabrielli et al. (2012) <em>Networked Beagleboards for wireless music applications</em></p>
+            </section>
+
+            <section>
+                <img src="./assets/devonport-foss2019.png" width="600">
+
+                <p>Devonport &amp; Foss (2019) <em>The Distribution of Ambisonic and Point Source Rendering to Ethernet
+                    AVB Speakers</em></p>
+            </section>
+
+            <section>
+                <img src="./assets/belloch2021.png" width="600">
+
+                <p>Belloch et al. (2021) <em>On the performance of a GPU-based SoC in a distributed spatial audio
+                    system</em></p>
+            </section>
+
+            <section>
+                <img src="./assets/rushton2023.png" width="600">
+
+                <p>Rushton, Michon &amp; Letz (2023) <em>A Microcontroller-based Network Client Towards Distributed
+                    Spatial Audio</em></p>
+            </section>
+        </section>
+
+        <section>
+            <h6>Research Questions</h6>
+
+            <section>
+                <blockquote class="fragment">
+                    How can a network of microcontrollers be used to create a distributed
+                    audio system suitable for managing scalable installations for spatial
+                    and immersive audio?
+                </blockquote>
+            </section>
+
+            <section>
+                <blockquote>
+                    How can such a system be created and configured such that it maintains
+                    inter-client synchronicity? What are the effects of loss of
+                    synchronicity on distributed spatialisation algorithms?
+                </blockquote>
+            </section>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/math/math.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        slideNumber: false,
+        autoAnimateEasing: 'opacity',
+        // margin: 0.04,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX]
+    });
+</script>
+</body>
 </html>
