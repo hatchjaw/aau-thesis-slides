@@ -28,7 +28,7 @@
         </section>
 
         <section>
-            <h6>Wave Field Synthesis</h6>
+            <h4>Wave Field Synthesis</h4>
             <section>
                 <img src="./assets/wfs_1.png" width="600">
 
@@ -48,7 +48,7 @@
 
                 <p class="fragment">
                     \[\begin{equation*}
-                    \mathbf{x} = \begin{bmatrix}x & y & z\end{bmatrix}^T
+                    \mathbf{x} = \begin{bmatrix}x & y & z\end{bmatrix}
                     \end{equation*} \]
                 </p>
 
@@ -68,7 +68,7 @@
         </section>
 
         <section>
-            <h6>Motivation</h6>
+            <h4>Motivation</h4>
 
             <section>
                 <img src="./assets/wfs_4.png" width="600">
@@ -86,7 +86,7 @@
         </section>
 
         <section>
-            <h6>Distributed Systems</h6>
+            <h4>Distributed Systems</h4>
 
             <section>
                 <blockquote>"A distributed system is a collection of independent entities that cooperate to solve a
@@ -108,8 +108,11 @@
                     </li>
                     <li class="fragment">Modularity
                         <ul>
-                            <li class="fragment">Entities may be added to the system <em>without affecting
-                                performance</em></li>
+                            <li class="fragment">The performance of a given entity is <em>independent</em> of that of
+                                other entities
+                            </li>
+                            <!--                            <li class="fragment">Entities may be added to the system <em>without affecting -->
+                            <!--                                performance</em></li>-->
                             <li class="fragment">The system is <em>incrementally extensible</em></li>
                         </ul>
                     </li>
@@ -137,16 +140,23 @@
         </section>
 
         <section>
-            <h6>Networked Audio</h6>
+            <h4>Networked Audio</h4>
 
             <section>
-                <blockquote>In a distributed audio system, cooperating entities must be served with the audio and
-                    control data that they need in order to perform their part of a signal processing problem.
+                <blockquote>In a distributed audio system, cooperating entities must be served with the audio and/or
+                    control data that they need in order to perform their part of an audio synthesis or signal
+                    processing task.
                 </blockquote>
+
+                <p class="fragment">How?</p>
+                <ul>
+                    <li class="fragment">Audio-specific systems, e.g. MADI (AES10)</li>
+                    <li class="fragment">Network-based systems: AoE, OSC</li>
+                </ul>
             </section>
 
             <section>
-                <p>Transport layer protocols</p>
+                <p>Transport layer protocols (OSI layer 4)</p>
                 <ul>
                     <li class="fragment">TCP
                         <ul>
@@ -168,7 +178,7 @@
             </section>
 
             <section>
-                <p>Network layer protocols</p>
+                <p>Network layer protocols (OSI layer 3)</p>
                 <ul>
                     <li class="fragment">AVB/AES67
                         <ul>
@@ -185,18 +195,31 @@
             </section>
 
             <section>
-                <p>Other systems</p>
+                <p>Domain-specific systems</p>
                 <ul>
-                    <li>JackTrip</li>
-                    <li>NetJack</li>
-                    <li>ZitaNJBridge</li>
-                    <li>A variety of other UDP-based systems for remote rehearsals, networked concerts, etc.</li>
+                    <li class="fragment">JackTrip
+                        <ul>
+                            <li>UDP-based, unicast</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">NetJack
+                        <ul>
+                            <li>A component of the <em>JACK Audio Connection Kit</em></li>
+                            <li>UDP-based, supports multicast</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">A variety of other UDP-based systems for remote rehearsals, networked concerts, etc.
+                        <ul>
+                            <li>ZitaNJBridge</li>
+                            <li>Elk OS, Jamulus, etc.</li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
         </section>
 
         <section>
-            <h6>Prior Art</h6>
+            <h4>Prior Art</h4>
 
             <section>
                 <img src="./assets/gabrielli2012.png" width="600">
@@ -219,7 +242,13 @@
             </section>
 
             <section>
-                <img src="./assets/rushton2023.png" width="700">
+                <!--                <img src="./assets/rushton2023.jpg" width="700">-->
+                <iframe src="https://youtube.com/embed/d4Sn4wNzoUs"
+                        width="800"
+                        height="450
+                        title=" JackTrip
+                /Teensy demo" frameborder="0"
+                allowfullscreen></iframe>
 
                 <p>Rushton, Michon &amp; Letz (2023) <em>A Microcontroller-based Network Client Towards Distributed
                     Spatial Audio</em></p>
@@ -227,7 +256,7 @@
         </section>
 
         <section>
-            <h6>Research Questions</h6>
+            <h4>Research Questions</h4>
 
             <section>
                 <blockquote class="fragment">
@@ -247,7 +276,7 @@
         </section>
 
         <section>
-            <h6>The Microcontroller Platform</h6>
+            <h4>The Microcontroller Platform</h4>
 
             <img src="./assets/module.jpeg" width="500">
 
@@ -259,10 +288,10 @@
         </section>
 
         <section>
-            <h6>The Networked Audio Server</h6>
+            <h4>The Networked Audio Server</h4>
 
             <section>
-                <img src="./assets/waveform.png" width="600">
+                <img src="./assets/waveform.png" width="400">
 
                 <pre style="width: 920px;"><code data-trim class="txt" data-line-numbers="|3-5|6,7|8,9">
                            00 01 02 03 04 05 06 07  08 09 0a 0b 0c 0d 0e 0f
@@ -279,6 +308,43 @@
 
             <section>
                 <img src="./assets/audio-server.png" width="1100">
+            </section>
+        </section>
+
+        <section>
+            <h4>The WFS Controller</h4>
+            <img src="./assets/plugin.png" width="700">
+        </section>
+
+        <section>
+            <h4>System Overview</h4>
+        </section>
+
+        <section>
+            <h4>Challenges</h4>
+        </section>
+
+        <section>
+            <h4>Mitigations</h4>
+        </section>
+
+        <section>
+            <h4>Results</h4>
+        </section>
+
+        <section>
+            <section>
+                <h3>Conclusion</h3>
+
+                <p class="fragment">saotehustnha</p>
+            </section>
+
+            <section>
+                <h5>Future work</h5>
+            </section>
+
+            <section>
+                <h2>Thank You</h2>
             </section>
         </section>
     </div>
