@@ -64,7 +64,6 @@
                     \end{equation*} \]
                 </p>
             </section>
-
         </section>
 
         <section>
@@ -82,6 +81,8 @@
                 <img src="./assets/wfs_5.png" width="600">
 
                 <p>What if we could distribute the work?</p>
+<!--                <p class="fragment">Each processor needs to know where it is, and the location of the virtual source</p>-->
+                <p class="fragment"><em>Synchronicity</em> will be important</p>
             </section>
         </section>
 
@@ -102,7 +103,7 @@
                 <ul>
                     <li>Scalability
                         <ul class="fragment">
-                            <li>Adding more entities <em>should not pose a bottleneck</em> for the communication network
+                            <li>Adding more entities <em>does not pose a bottleneck</em> for the communication network
                             </li>
                         </ul>
                     </li>
@@ -111,15 +112,12 @@
                             <li class="fragment">The performance of a given entity is <em>independent</em> of that of
                                 other entities
                             </li>
-                            <!--                            <li class="fragment">Entities may be added to the system <em>without affecting -->
-                            <!--                                performance</em></li>-->
-                            <li class="fragment">The system is <em>incrementally extensible</em></li>
                         </ul>
                     </li>
                     <li class="fragment">Improved cost/performance ratio
                         <ul>
-                            <li class="fragment">A scalable, modular system can be extended with <em>minimal
-                                redundancy</em></li>
+                            <li class="fragment">A scalable, modular system is <em>incrementally extensible</em> with
+                                <em>minimal redundancy</em></li>
                         </ul>
                     </li>
                 </ul>
@@ -135,6 +133,7 @@
                         </ul>
                     </li>
                     <li class="fragment">More potential points of failure</li>
+                    <li class="fragment">No authoritative source of time</li>
                 </ul>
             </section>
         </section>
@@ -150,8 +149,8 @@
 
                 <p class="fragment">How?</p>
                 <ul>
-                    <li class="fragment">Audio-specific systems, e.g. MADI (AES10)</li>
                     <li class="fragment">Network-based systems: AoE, OSC</li>
+                    <li class="fragment">Many audio channels, and streams of control data, over one cable</li>
                 </ul>
             </section>
 
@@ -177,6 +176,30 @@
                 </ul>
             </section>
 
+<!--            <section>-->
+<!--                <p>Transport-layer systems</p>-->
+<!--                <ul>-->
+<!--                    <li class="fragment">JackTrip-->
+<!--                        <ul>-->
+<!--                            <li>UDP-based, unicast</li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="fragment">NetJack-->
+<!--                        <ul>-->
+<!--                            <li>A component of the <em>JACK Audio Connection Kit</em></li>-->
+<!--                            <li>UDP-based, supports multicast</li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="fragment">A variety of other UDP-based systems for remote rehearsals, networked concerts,-->
+<!--                        etc.-->
+<!--                        <ul>-->
+<!--                            <li>ZitaNJBridge</li>-->
+<!--                            <li>Elk OS, Jamulus, etc.</li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </section>-->
+
             <section>
                 <p>Network layer protocols (OSI layer 3)</p>
                 <ul>
@@ -187,31 +210,8 @@
                     </li>
                     <li class="fragment">Dante
                         <ul>
+                            <li class="fragment">Also requires PTP</li>
                             <li class="fragment">Proprietary</li>
-                            <li class="fragment">Also reliant on PTP</li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-
-            <section>
-                <p>Domain-specific systems</p>
-                <ul>
-                    <li class="fragment">JackTrip
-                        <ul>
-                            <li>UDP-based, unicast</li>
-                        </ul>
-                    </li>
-                    <li class="fragment">NetJack
-                        <ul>
-                            <li>A component of the <em>JACK Audio Connection Kit</em></li>
-                            <li>UDP-based, supports multicast</li>
-                        </ul>
-                    </li>
-                    <li class="fragment">A variety of other UDP-based systems for remote rehearsals, networked concerts, etc.
-                        <ul>
-                            <li>ZitaNJBridge</li>
-                            <li>Elk OS, Jamulus, etc.</li>
                         </ul>
                     </li>
                 </ul>
@@ -219,40 +219,16 @@
         </section>
 
         <section>
-            <h4>Prior Art</h4>
+            <h4>The Microcontroller Platform</h4>
 
-            <section>
-                <img src="./assets/gabrielli2012.png" width="600">
+            <img src="./assets/module.jpeg" width="500">
 
-                <p>Gabrielli et al. (2012) <em>Networked Beagleboards for wireless music applications</em></p>
-            </section>
-
-            <section>
-                <img src="./assets/devonport-foss2019.png" width="600">
-
-                <p>Devonport &amp; Foss (2019) <em>The Distribution of Ambisonic and Point Source Rendering to Ethernet
-                    AVB Speakers</em></p>
-            </section>
-
-            <section>
-                <img src="./assets/belloch2021.png" width="600">
-
-                <p>Belloch et al. (2021) <em>On the performance of a GPU-based SoC in a distributed spatial audio
-                    system</em></p>
-            </section>
-
-            <section>
-                <!--                <img src="./assets/rushton2023.jpg" width="700">-->
-                <iframe src="https://youtube.com/embed/d4Sn4wNzoUs"
-                        width="800"
-                        height="450
-                        title=" JackTrip
-                /Teensy demo" frameborder="0"
-                allowfullscreen></iframe>
-
-                <p>Rushton, Michon &amp; Letz (2023) <em>A Microcontroller-based Network Client Towards Distributed
-                    Spatial Audio</em></p>
-            </section>
+            <ul>
+                <li>Teensy 4.1</li>
+                <li class="fragment">Support for ethernet and audio</li>
+                <li class="fragment">Easily reprogrammable</li>
+                <li class="fragment">~€45</li>
+            </ul>
         </section>
 
         <section>
@@ -276,19 +252,53 @@
         </section>
 
         <section>
-            <h4>The Microcontroller Platform</h4>
+            <h4>Prior Art</h4>
 
-            <img src="./assets/module.jpeg" width="500">
+<!--            <section>-->
+<!--                <img src="./assets/gabrielli2012.png" width="600">-->
 
-            <ul>
-                <li class="fragment">Support for ethernet and audio</li>
-                <li class="fragment">Easily reprogrammable</li>
-                <li class="fragment">~€45</li>
-            </ul>
+<!--                <p><small>Gabrielli et al. (2012) <em>Networked Beagleboards for wireless music applications</em></small></p>-->
+<!--            </section>-->
+
+            <section>
+                <img src="./assets/devonport-foss2019.png" width="600">
+
+                <p><small>Devonport &amp; Foss (2019) <em>The Distribution of Ambisonic and Point Source Rendering to
+                    Ethernet AVB Speakers</em></small></p>
+            </section>
+
+            <section>
+                <img src="./assets/belloch2021.png" width="600">
+
+                <p><small>Belloch et al. (2021) <em>On the performance of a GPU-based SoC in a distributed spatial audio
+                    system</em></small></p>
+            </section>
+
+            <section>
+                <iframe src="https://youtube.com/embed/d4Sn4wNzoUs"
+                        width="800"
+                        height="450"
+                        title="JackTrip Teensy demo"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+
+                <p><small>Rushton, Michon &amp; Letz (2023) <em>A Microcontroller-based Network Client Towards
+                    Distributed Spatial Audio</em></small></p>
+
+                <p class="fragment">JackTrip-based system &mdash; unicast only &mdash; limited scalability</p>
+            </section>
         </section>
 
         <section>
             <h4>The Networked Audio Server</h4>
+
+            <section>
+                <img src="./assets/unicast.png" width="600">
+            </section>
+
+            <section>
+                <img src="./assets/multicast.png" width="600">
+            </section>
 
             <section>
                 <img src="./assets/waveform.png" width="400">
@@ -317,30 +327,53 @@
         </section>
 
         <section>
-            <h4>System Overview</h4>
-        </section>
-
-        <section>
             <h4>Challenges</h4>
-        </section>
 
-        <section>
-            <h4>Mitigations</h4>
+            <section>
+                <p class="fragment">Clock drift</p>
+                <p class="fragment">Jitter</p>
+            </section>
         </section>
 
         <section>
             <h4>Results</h4>
+
+            <section>
+                <img src="./assets/rtt_drift_32.png" width="550">
+
+                <p class="fragment">Clients move relative to each other...</p>
+                <p class="fragment">...but remain within ~1 buffer's worth of samples</p>
+            </section>
+
+            <section>
+                <img src="./assets/wfs_6.png" width="600">
+                <p>Asynchronicity will result in irregular wavefronts</p>
+                <p class="fragment">Rapid movement will cause audible <em>phasing</em></p>
+            </section>
+
+            <section>
+                <img src="./assets/subjective_1.png" width="350">
+                <p>For perceptual evaluation, participants were asked to mark the location of a virtual sound source</p>
+            </section>
+
+            <section>
+                <img src="./assets/subjective_2.png" width="500">
+                <p>A degree of irregularity may not completely undermine the holophonic effect of WFS</p>
+            </section>
         </section>
 
         <section>
             <section>
                 <h3>Conclusion</h3>
 
-                <p class="fragment">saotehustnha</p>
+                <p class="fragment"></p>
+                <p class="fragment">Extensibility restricted due to limited memory on Teensy 4.1</p>
             </section>
 
             <section>
                 <h5>Future work</h5>
+
+                <p class="fragment"></p>
             </section>
 
             <section>
