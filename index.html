@@ -81,7 +81,7 @@
                 <img src="./assets/wfs_5.png" width="600">
 
                 <p>What if we could distribute the work?</p>
-<!--                <p class="fragment">Each processor needs to know where it is, and the location of the virtual source</p>-->
+                <!--                <p class="fragment">Each processor needs to know where it is, and the location of the virtual source</p>-->
                 <p class="fragment"><em>Synchronicity</em> will be important</p>
             </section>
         </section>
@@ -103,7 +103,7 @@
                 <ul>
                     <li>Scalability
                         <ul class="fragment">
-                            <li>Adding more entities <em>does not pose a bottleneck</em> for the communication network
+                            <li>Adding more entities <em>does not pose a bottleneck</em> for the communication channel
                             </li>
                         </ul>
                     </li>
@@ -176,29 +176,29 @@
                 </ul>
             </section>
 
-<!--            <section>-->
-<!--                <p>Transport-layer systems</p>-->
-<!--                <ul>-->
-<!--                    <li class="fragment">JackTrip-->
-<!--                        <ul>-->
-<!--                            <li>UDP-based, unicast</li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="fragment">NetJack-->
-<!--                        <ul>-->
-<!--                            <li>A component of the <em>JACK Audio Connection Kit</em></li>-->
-<!--                            <li>UDP-based, supports multicast</li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li class="fragment">A variety of other UDP-based systems for remote rehearsals, networked concerts,-->
-<!--                        etc.-->
-<!--                        <ul>-->
-<!--                            <li>ZitaNJBridge</li>-->
-<!--                            <li>Elk OS, Jamulus, etc.</li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </section>-->
+            <!--            <section>-->
+            <!--                <p>Transport-layer systems</p>-->
+            <!--                <ul>-->
+            <!--                    <li class="fragment">JackTrip-->
+            <!--                        <ul>-->
+            <!--                            <li>UDP-based, unicast</li>-->
+            <!--                        </ul>-->
+            <!--                    </li>-->
+            <!--                    <li class="fragment">NetJack-->
+            <!--                        <ul>-->
+            <!--                            <li>A component of the <em>JACK Audio Connection Kit</em></li>-->
+            <!--                            <li>UDP-based, supports multicast</li>-->
+            <!--                        </ul>-->
+            <!--                    </li>-->
+            <!--                    <li class="fragment">A variety of other UDP-based systems for remote rehearsals, networked concerts,-->
+            <!--                        etc.-->
+            <!--                        <ul>-->
+            <!--                            <li>ZitaNJBridge</li>-->
+            <!--                            <li>Elk OS, Jamulus, etc.</li>-->
+            <!--                        </ul>-->
+            <!--                    </li>-->
+            <!--                </ul>-->
+            <!--            </section>-->
 
             <section>
                 <p>Network layer protocols (OSI layer 3)</p>
@@ -254,11 +254,11 @@
         <section>
             <h4>Prior Art</h4>
 
-<!--            <section>-->
-<!--                <img src="./assets/gabrielli2012.png" width="600">-->
+            <!--            <section>-->
+            <!--                <img src="./assets/gabrielli2012.png" width="600">-->
 
-<!--                <p><small>Gabrielli et al. (2012) <em>Networked Beagleboards for wireless music applications</em></small></p>-->
-<!--            </section>-->
+            <!--                <p><small>Gabrielli et al. (2012) <em>Networked Beagleboards for wireless music applications</em></small></p>-->
+            <!--            </section>-->
 
             <section>
                 <img src="./assets/devonport-foss2019.png" width="600">
@@ -298,6 +298,15 @@
 
             <section>
                 <img src="./assets/multicast.png" width="600">
+
+                <ul>
+                    <li class="fragment">Aims:
+                        <ul>
+                            <li class="fragment">Improved scalability</li>
+                            <li class="fragment">Improved synchronicity</li>
+                        </ul>
+                    </li>
+                </ul>
             </section>
 
             <section>
@@ -323,15 +332,37 @@
 
         <section>
             <h4>The WFS Controller</h4>
-            <img src="./assets/plugin.png" width="700">
+            <img src="./assets/plugin.png" width="550">
+
+            <p class="fragment">Interface for virtual sound source positions</p>
+            <p class="fragment">Combined server for audio and control data</p>
         </section>
 
         <section>
-            <h4>Challenges</h4>
+            <h4>Challenges &amp; Mitigations</h4>
 
             <section>
-                <p class="fragment">Clock drift</p>
-                <p class="fragment">Jitter</p>
+                <p>Jitter</p>
+                <p class="fragment"><em>Fluctuations in the rate of transmission</em></p>
+                <img class="fragment" src="./assets/rw_delta.png" width="400">
+                <ul>
+                    <li class="fragment">Aim to maintain a consistent read-write delta</li>
+                    <li class="fragment">Fractional read-increment</li>
+                    <li class="fragment">Interpolate to yield sample amplitude</li>
+                    <li class="fragment"><em>Adaptive resampling</em></li>
+                </ul>
+            </section>
+
+            <section>
+                <p>Clock drift</p>
+                <p class="fragment"><em>No two clocks are identical</em></p>
+                <ul>
+                    <li class="fragment">Compute ratio of packets received to packets sent</li>
+                    <li class="fragment">Use ratio to determine sampling rate</li>
+                    <li class="fragment">Adjust by setting Audio PLL numerator and SAI1 post-divisor</li>
+                </ul>
+                <img class="fragment" src="./assets/teensy_clock_1.png" width="600">
+                <img class="fragment" src="./assets/teensy_clock_2.png" width="600">
             </section>
         </section>
 
@@ -358,7 +389,7 @@
 
             <section>
                 <img src="./assets/subjective_2.png" width="500">
-                <p>A degree of irregularity may not completely undermine the holophonic effect of WFS</p>
+                <p>A degree of wavefront irregularity may not completely undermine the holophonic effect of WFS</p>
             </section>
         </section>
 
@@ -366,14 +397,29 @@
             <section>
                 <h3>Conclusion</h3>
 
-                <p class="fragment"></p>
+                <p class="fragment">The multicast system doesn't appreciably improve synchronicity</p>
+                <p class="fragment">Clock adjustment strategy unreliable</p>
                 <p class="fragment">Extensibility restricted due to limited memory on Teensy 4.1</p>
+                <br>
+                <p class="fragment">Development of a multipurpose, multicast networked audio server</p>
+                <p class="fragment">Evidence that the WFS algorithm produces localisable sound</p>
             </section>
 
             <section>
                 <h5>Future work</h5>
 
-                <p class="fragment"></p>
+                <p class="fragment">The ultimate aim is <em>sample-accurate</em> synchronisation, via:</p>
+
+                <ul>
+                    <li class="fragment">An authoritative source of time: PTP, word clock</li>
+                    <li class="fragment">Or sharing a clock signal produced by a Teensy <em>acting as a clock
+                        authority</em></li>
+                    <li class="fragment">Thorough investigation of all elements of the network transmission path for
+                        causes of jitter
+                    </li>
+                </ul>
+
+                <p class="fragment">Further applications of networked and distributed audio</p>
             </section>
 
             <section>
