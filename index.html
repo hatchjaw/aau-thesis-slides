@@ -143,8 +143,7 @@
 
             <section>
                 <blockquote>In a distributed audio system, cooperating entities must be served with the audio and/or
-                    control data that they need in order to perform their part of an audio synthesis or signal
-                    processing task.
+                    control data that they need in order to perform their part of a signal processing task.
                 </blockquote>
 
                 <p class="fragment">How?</p>
@@ -155,7 +154,7 @@
             </section>
 
             <section>
-                <p>Transport layer protocols (OSI layer 4)</p>
+                <p>Transport layer protocols</p>
                 <ul>
                     <li class="fragment">TCP
                         <ul>
@@ -200,22 +199,22 @@
             <!--                </ul>-->
             <!--            </section>-->
 
-            <section>
-                <p>Network layer protocols (OSI layer 3)</p>
-                <ul>
-                    <li class="fragment">AVB/AES67
-                        <ul>
-                            <li class="fragment">Reliant on PTP-enabled hardware</li>
-                        </ul>
-                    </li>
-                    <li class="fragment">Dante
-                        <ul>
-                            <li class="fragment">Also requires PTP</li>
-                            <li class="fragment">Proprietary</li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
+<!--            <section>-->
+<!--                <p>Network layer protocols (OSI layer 3)</p>-->
+<!--                <ul>-->
+<!--                    <li class="fragment">AVB/AES67-->
+<!--                        <ul>-->
+<!--                            <li class="fragment">Reliant on PTP-enabled hardware</li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="fragment">Dante-->
+<!--                        <ul>-->
+<!--                            <li class="fragment">Also requires PTP</li>-->
+<!--                            <li class="fragment">Proprietary</li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </section>-->
         </section>
 
         <section>
@@ -312,16 +311,16 @@
             <section>
                 <img src="./assets/waveform.png" width="400">
 
-                <pre style="width: 920px;"><code data-trim class="txt" data-line-numbers="|3-5|6,7|8,9">
+                <pre style="width: 725px;"><code data-trim class="txt" data-line-numbers="|3-5|6,7|8,9">
                            00 01 02 03 04 05 06 07  08 09 0a 0b 0c 0d 0e 0f
 
-                    0000   01 00 5e 04 e0 04 a0 36  bc d0 aa 18 08 00 45 00   ..^....6......E.
-                    0010   00 62 8b b5 40 00 01 11  63 1a c0 a8 0a 0a e0 04   .b..@...c.......
-                    0020   e0 04 39 f9 a3 56 00 4e  66 2b df 1c 04 02 02 02   ..9..V.Nf+......
-                    0030   3f 7a 40 7a 41 7a 42 7a  43 7a 44 7a 45 7a 46 7a   ?z@zAzBzCzDzEzFz
-                    0040   47 7a 48 7a 49 7a 4a 7a  4b 7a 4c 7a 4d 7a 4e 7a   GzHzIzJzKzLzMzNz
-                    0050   2c 8c ff 88 43 86 05 84  46 82 00 81 44 80 00 80   ,...C...F...D...
-                    0060   45 80 ff 80 46 82 06 84  41 86 02 89 29 8c db 8f   E...F...A...)...
+                    0000   01 00 5e 04 e0 04 a0 36  bc d0 aa 18 08 00 45 00
+                    0010   00 62 8b b5 40 00 01 11  63 1a c0 a8 0a 0a e0 04
+                    0020   e0 04 39 f9 a3 56 00 4e  66 2b df 1c 04 02 02 02
+                    0030   3f 7a 40 7a 41 7a 42 7a  43 7a 44 7a 45 7a 46 7a
+                    0040   47 7a 48 7a 49 7a 4a 7a  4b 7a 4c 7a 4d 7a 4e 7a
+                    0050   2c 8c ff 88 43 86 05 84  46 82 00 81 44 80 00 80
+                    0060   45 80 ff 80 46 82 06 84  41 86 02 89 29 8c db 8f
                 </code></pre>
             </section>
 
@@ -344,10 +343,12 @@
             <section>
                 <p>Jitter</p>
                 <p class="fragment"><em>Fluctuations in the rate of transmission</em></p>
+                <p class="fragment">Clients write incoming audio data to a circular buffer</p>
                 <img class="fragment" src="./assets/rw_delta.png" width="400">
                 <ul>
                     <li class="fragment">Aim to maintain a consistent read-write delta</li>
-                    <li class="fragment">Fractional read-increment</li>
+                    <li class="fragment"><em>Delay-locked loop</em></li>
+                    <li class="fragment">Fractional read-position increment</li>
                     <li class="fragment">Interpolate to yield sample amplitude</li>
                     <li class="fragment"><em>Adaptive resampling</em></li>
                 </ul>
